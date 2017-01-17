@@ -1,0 +1,33 @@
+body {
+ background-color: black; 
+}
+
+.clock, .alarm {
+ text-align: center;
+ min-width: 250px;
+}
+.clock {
+ margin-top: 20rem;
+}
+.alarm {
+ margin-top: 5rem;
+}
+.alarm dropdown {
+ display: inline-block;
+}
+.time { 
+ font-size: 25rem; 
+ display: inline-block;
+ color: lightblue; 
+}
+
+
+@media (max-width: 600px) { 
+ .time { 
+
+
+  }
+
+}
+ 
+

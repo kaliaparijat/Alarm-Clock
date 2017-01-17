@@ -1,0 +1,26 @@
+<!doctype html>
+<head>
+<title>Alarm Clock for SquareSpace</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/main.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class = "alarm">
+ <select class="hour" id="hourDropdown"></select>
+ <select class="minute" id="hourMinute"></select>	
+ <select class="meridien" id="hourMeridien">
+  <option value="am">am</option>
+  <option value="pm">pm</option>	
+ </select>	
+</div>
+
+<div class = "clock">
+ <div class = "time hour" id="hour"></div>
+ <div class = "time colon">:</div>
+ <div class = "time minute" id="minute"></div>
+</div>
+
+<script src = "js/model.js"></script>
+<script src = "js/view.js"></script> 
+</body>
+</html>
