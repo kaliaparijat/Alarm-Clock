@@ -9,6 +9,7 @@
 	this.el.hourDropdown = document.getElementById('hourDropdown');
 	this.el.minuteDropdown = document.getElementById('minuteDropdown');
 
+
 	this.buildDropdownList(this.el.hourDropdown, 24).
 	buildDropdownList(this.el.minuteDropdown, 60);
 	
@@ -18,8 +19,6 @@
 	observeChangesToModel();
  };
 
-  App.View.prototype.buildDropdownElements = function () { 
-  };
   
   App.View.prototype.buildDropdownList = function (select, limit) {  	 
 	  var timeString = '';
@@ -27,8 +26,20 @@
 		  var timeString = (i < 10) ? ('0' + i) : i.toString();
 		  select.options[select.options.length] = new Option(timeString, i);
 	  }
-	  return this;
-  }; 
+	  select.addEventListener("change", this.setAlarmTime.bind(this, select));
+          return this;
+   };
+
+   App.View.prototype.setAlarmTime = function(select) { 
+   	if (select.id === 'hourDropdown') {  
+	   this.model.setAlarmHour(select.value);		   
+	}
+	else if (select.id === 'minuteDropdown') { 
+	   this.model.setAlarmMinute(select.value); 		
+	}
+   }; 
+
+
   App.View.prototype.updateView = function () { 
 	  this.el.hour.textContent =  (this.currentHour < 10) ?  '0' + this.currentHour : this.currentHour;
 	  this.el.minute.textContent = (this.currentMinute < 10) ? '0' + this.currentMinute : this.currentMinute;
@@ -44,11 +55,14 @@
 
   App.View.prototype.observeChangesToModel = function () {  
 	  var _this = this;
-	  setInterval(function () {  
+	  setInterval(function () {  	  
 		  if (_this.model.getMinute() !== _this.currentMinute || _this.model.getHour() !== _this.currentHour) { 
 			  _this.setCurrentTime().
 			  updateView();
-		  }  
+		  } 
+		  if (_this.currentHour === _this.model.getAlarmHour() && _this.currentMinute === _this.model.getAlarmMinute()) { 
+		  	console.log("alarm has gone off");
+		  } 
 	  }, 1000); // observe every second
    };
   

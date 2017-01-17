@@ -15,12 +15,29 @@
 		return this.time.minutes;
 	};
 
+	App.model.prototype.setAlarmHour = function (hour) {  
+		return this.time.alarm.hour = parseInt(hour);
+	};
+
+	App.model.prototype.setAlarmMinute = function (minute) {
+		return this.time.alarm.minute = parseInt(minute);
+	};
+
+	App.model.prototype.getAlarmHour = function () { 
+		return this.time.alarm.hour;
+	};
+
+	App.model.prototype.getAlarmMinute = function () { 
+		return this.time.alarm.minute;
+	};
+
 	App.model.prototype.setModel = function () {  
 		var currentDate = new Date();
 		this.time = this.time || {};
 		this.time.hours = currentDate.getHours();
 		this.time.minutes = currentDate.getMinutes();
 		this.time.seconds = currentDate.getSeconds();
+		this.time.alarm = {}
 		console.log(this.time);
 		return this;
 	};
