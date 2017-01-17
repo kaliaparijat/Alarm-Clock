@@ -5,20 +5,26 @@
 <link href="css/main.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div class = "alarm">
- <select class="hour" id="hourDropdown"></select>
- <select class="minute" id="hourMinute"></select>	
- <select class="meridien" id="hourMeridien">
-  <option value="am">am</option>
-  <option value="pm">pm</option>	
- </select>	
-</div>
-
 <div class = "clock">
  <div class = "time hour" id="hour"></div>
  <div class = "time colon">:</div>
  <div class = "time minute" id="minute"></div>
 </div>
+
+<div class = "alarm">
+ <select class="hour" id="hourDropdown">
+	<option value="" selected>Hour</option>
+ </select>
+ <select class="minute" id="minuteDropdown">
+	<option value="" selected>Minute</option>
+</select>	
+ <select class="meridien" id="meridien">
+  <option value="am" selected>am</option>
+  <option value="pm">pm</option>	
+ </select>	
+</div>
+
+
 
 <script src = "js/model.js"></script>
 <script src = "js/view.js"></script> 

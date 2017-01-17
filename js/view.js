@@ -9,37 +9,25 @@
 	this.el.hourDropdown = document.getElementById('hourDropdown');
 	this.el.minuteDropdown = document.getElementById('minuteDropdown');
 
-	this.buildDropdownElements();
+	this.buildDropdownList(this.el.hourDropdown, 24).
+	buildDropdownList(this.el.minuteDropdown, 60);
+	
 	this.model = new App.model();
-
  	this.setCurrentTime().
 	updateView().
 	observeChangesToModel();
  };
 
   App.View.prototype.buildDropdownElements = function () { 
-  	var hoursUl = this.getDropdownList(24);
-	var minutesUl = this.getDropdownList(60);	
-	this.el.hourDropdown.appendChild(hoursUl);
-	this.el.minuteDropdown.appendChild(minutesUl);
-	
   };
   
-  App.View.prototype.getDropdownList = function (limit) {  	
-	  var ul = document.createElement('ul');
-	  ul.setAttribute('class', 'dropdown-menu')
-	  ul.setAttribute('aria-labelledby', 'dropdownMenu1'); 
-	  
-	  var createLinkTag = function (value) {  
-		  return '<a href="#">' + value + '</a>';
-	  };
-	   var timeString = '', listElements = '';
-	  for ( var i = 0; i < limit ; i++ ) { 
-		  timeString = (i < 10) ? ('0' + i) : i.toString();
-		  listElements += '<li>' + createLinkTag(timeString) + '</li>';
+  App.View.prototype.buildDropdownList = function (select, limit) {  	 
+	  var timeString = '';
+	  for ( var i = 0; i < limit ; i++ ) { 	  
+		  var timeString = (i < 10) ? ('0' + i) : i.toString();
+		  select.options[select.options.length] = new Option(timeString, i);
 	  }
-	  ul.innerHTML = listElements; 
-	  return ul;
+	  return this;
   }; 
   App.View.prototype.updateView = function () { 
 	  this.el.hour.textContent =  (this.currentHour < 10) ?  '0' + this.currentHour : this.currentHour;
