@@ -1,6 +1,7 @@
 (function() { 
 
-	App = window.app || {};
+	"use strict";			
+	var App = window.app || {};
 
 	App.model = function() {	
 		this.setModel()
@@ -8,11 +9,11 @@
 	};
 
 	App.model.prototype.getHour = function () { 
-		return this.time.hours;
+		return this.time.hour;
 	};
 
 	App.model.prototype.getMinute = function () { 
-		return this.time.minutes;
+		return this.time.minute;
 	};
 
 	App.model.prototype.setAlarmHour = function (hour) {  
@@ -30,20 +31,32 @@
 	App.model.prototype.getAlarmMinute = function () { 
 		return this.time.alarm.minute;
 	};
+ 
+	App.model.prototype.isAlarmSet = function () { 
+ 		return this.time.alarm !== undefined && this.time.alarm.hour !== undefined && this.time.alarm.minute !== undefined;
+	};
+
+	App.model.prototype.isItTime = function() { 
+		return this.time.alarm.hour === this.time.hour && this.time.alarm.minute == this.time.minute; 		
+	};
+
+	App.model.prototype.isPastAlarmTime = function() { 
+		return this.time.hour >= this.time.alarm.hour && (this.time.minute > this.time.alarm.minute); // resets the alarm after 1 minutes, I suppose 
+	};
 
 	App.model.prototype.setModel = function () {  
 		var currentDate = new Date();
 		this.time = this.time || {};
-		this.time.hours = currentDate.getHours();
-		this.time.minutes = currentDate.getMinutes();
-		this.time.seconds = currentDate.getSeconds();
-		this.time.alarm = {}
+		this.time.hour = currentDate.getHours();
+		this.time.minute = currentDate.getMinutes();
+		this.time.second = currentDate.getSeconds();
+		this.time.alarm = this.time.alarm || {};
 		console.log(this.time);
 		return this;
 	};
 
 	App.model.prototype.getMillisecondsForInitialRefresh = function() {    
-		return ((59 - this.time.seconds) * 1000);
+		return ((59 - this.time.second) * 1000);
 	};
 
 	App.model.prototype.refreshModel = function (refresh) { 

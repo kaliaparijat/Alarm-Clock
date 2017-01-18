@@ -1,5 +1,5 @@
 body {
- background-color: black; 
+ background-color: #404040; 
 }
 
 .clock, .alarm {
@@ -7,27 +7,24 @@ body {
  min-width: 250px;
 }
 .clock {
- margin-top: 20rem;
+ margin-top: 10rem;
+ color: #4070FF;
+ font-size: 25rem; 
 }
+
 .alarm {
  margin-top: 5rem;
 }
+
 .alarm dropdown {
  display: inline-block;
 }
-.time { 
- font-size: 25rem; 
+
+.clock > div { 
  display: inline-block;
- color: lightblue; 
 }
 
-
-@media (max-width: 600px) { 
- .time { 
-
-
-  }
-
+.alarm { 
+ color: #FF495F;
 }
- 
 
